@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+/* Sorriso brand tokens (from the Sorriso brand board). */
+:root {
+  --sorriso-navy: #071233;
+  --sorriso-red: #c21500;
+  --sorriso-beige: #f5f5dc;
+  --sorriso-blue: #3c5e95;
+  --sorriso-sky: #98abc6;
+}
+
+@theme inline {
+  --color-sorriso-navy: var(--sorriso-navy);
+  --color-sorriso-red: var(--sorriso-red);
+  --color-sorriso-beige: var(--sorriso-beige);
+  --color-sorriso-blue: var(--sorriso-blue);
+  --color-sorriso-sky: var(--sorriso-sky);
+
+  /*
+   * FONT STAND-INS. Brand fonts are SC Portugal (primary) and Fonseca
+   * (secondary). Swap these two variables once the licensed web font files
+   * are added (see layout.tsx).
+   */
+  --font-display: var(--font-stand-in-display); /* stands in for SC Portugal */
+  --font-heading: var(--font-stand-in-heading); /* stands in for Fonseca */
+  --font-sans: var(--font-stand-in-heading);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--sorriso-beige);
+  color: var(--sorriso-navy);
+}
+
+::selection {
+  background: var(--sorriso-red);
+  color: var(--sorriso-beige);
+}
+
+:focus-visible {
+  outline: 3px solid var(--sorriso-red);
+  outline-offset: 3px;
+}
+
+/* Rooster band marquee */
+@keyframes sorriso-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: sorriso-marquee 40s linear infinite;
+}
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Steam above the cup in the hero mark */
+@keyframes sorriso-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.float {
+  animation: sorriso-float 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee-track,
+  .float {
+    animation: none;
+  }
+}
